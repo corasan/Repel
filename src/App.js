@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import MonacoEditor from 'react-monaco-editor';
+import NavBar from './components/NavBar'
+import './styles/main.css'
 
 class App extends Component {
   render() {
@@ -11,13 +13,25 @@ class App extends Component {
     }
 
     return (
-      <MonacoEditor
-        width="800"
-        height="600"
-        language="javascript"
-        value="// type your code..."
-        requireConfig={requireConfig}
-      />
+      <div id="app">
+        <NavBar />
+
+        <div id="content">
+          <div id="editor">
+            <MonacoEditor
+              width="100%"
+              height="600"
+              language="javascript"
+              value="// type your code..."
+              requireConfig={requireConfig}
+              theme="vs-dark"
+            />
+          </div>
+
+          <div id="term">
+          </div>
+        </div>
+      </div>
     )
   }
 }
