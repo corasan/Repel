@@ -1,6 +1,5 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
-const url = require('url')
 const glob = require('glob')
 const fs = require('graceful-fs')
 
@@ -8,14 +7,10 @@ let win
 
 function createWindow() {
   loadDemos()
-  win = new BrowserWindow()
+  win = new BrowserWindow({ webPreferences: { nodeIntegration: false } })
   win.maximize()
 
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'public/index.html'),
-    protocol: 'file:',
-    slashes: true,
-  }))
+  win.loadURL('http://localhost:3000')
 
   if (process.env.REPEL_BUILD !== 'production') {
     win.webContents.openDevTools()
