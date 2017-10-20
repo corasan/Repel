@@ -4,6 +4,14 @@ import NavBar from './components/NavBar'
 import './styles/main.css'
 
 class App extends Component {
+  state = {
+    code: '',
+  }
+
+  onChange = (e) => {
+    this.setState({ code: e.event.value })
+  }
+
   render() {
     const requireConfig = {
       url: 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js',
@@ -14,17 +22,16 @@ class App extends Component {
 
     return (
       <div id="app">
-        <NavBar />
+        <NavBar code={this.state.code} />
 
         <div id="content">
           <div id="editor">
             <MonacoEditor
-              width="100%"
-              height="600"
               language="javascript"
-              value="// type your code..."
+              value={this.state.code}
               requireConfig={requireConfig}
-              theme="vs-dark"
+              // theme="vs-dark"
+              onChange={this.onChange}
             />
           </div>
 

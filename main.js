@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcRenderer } = require('electron')
 const path = require('path')
 const glob = require('glob')
 const fs = require('graceful-fs')
@@ -7,12 +7,16 @@ let win
 
 function createWindow() {
   loadDemos()
-  win = new BrowserWindow({ webPreferences: { nodeIntegration: false } })
+  win = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: false,
+    }
+  })
   win.maximize()
 
   win.loadURL('http://localhost:3000')
 
-  if (process.env.REPEL_BUILD !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     win.webContents.openDevTools()
   }
 
